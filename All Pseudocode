@@ -1,0 +1,160 @@
+# Pseudocode:
+
+# Helper function 1
+define function load_data:
+    create two empty lists for storing names and distances
+
+    open the names file for reading
+    for each line in the file:
+        remove the newline character
+        add the cleaned-up city name to the list of cities
+
+    open the distance file for reading
+    for each line in the file:
+        remove the newline character
+        split the line into individual numbers (as strings)
+        convert each string to a number
+        add the list of numbers to the distances list
+        
+        return both lists (cities and distances)
+
+# Helper function 2
+ define function nearest_unvisited:
+    set closest_city to nothing yet
+    set shortest_trip to a large placeholder number
+
+    for each city still unvisited:
+        look up the distance from the current city to this unvisited city
+        if this distance < current shortest_trip:
+            update shortest_trip with new shorter distance
+            store this city as closest_city
+
+    return closest city found and shortest_trip distance
+
+# Helper Funtion 3
+def function tsp_recursive(partial_route, remaining cities):
+    use global routes
+    if remaining cities is empty:
+        add partial_route to routes
+
+    else:
+        for each remainder cities:
+            create partial_route copy 
+            add city to copy
+
+            create remaining_cities copy
+            remove city from copy
+        
+        call tsp_recursive function
+
+        print routes
+        return routes
+
+# Helper Funtion 4
+import math library
+
+def function calculate_distance(route, dist_list, city_list):
+  total = 0
+
+  for i in range len(route) - 1:
+    total = total + dist_list[city_list.index(route[i])][city_list.index(route[i+1])]
+    total+=dist_list[city_list.index(route[-1])][city_list.index(route[0])]
+    return total
+
+# Evolutionary 
+import random library
+
+def tsp_evollution funtion:
+    dist_list, city_list=read_files(name_file,distance_file)
+    peak=[]
+    stags=0
+
+    route = city_list[:]
+    peak_dist = call helper function calculate_distance(route,dist_list,city_list)
+    peak_route = route copy
+    
+    while stags is less than 3:
+        improved = False
+        for offspring_num in range up to 100:
+            offspring = call evolut_mutate function
+            offspring_dist = call calculate_distance
+
+            if offspring_dist is less than peak_distance:
+                peak_distance = offspring_dist
+                peak_route = offspring
+                route = offspring
+                improved = True
+
+        if not improved:
+            stags += 1
+            append peak_route.copy
+            route = stags(peak_route)
+    
+    return peak_route, peak_dist
+
+# Evo Mutate
+def evolut_mutate:
+  rand_city1 = random.randint(0, len(route) - 1)
+  rand_city2 = random.randint(0, len(route) - 1)
+            
+    while rand_city1 is rand_city2:
+        rand_city2 = random.randint(0, len(route) - 1)
+
+    temp = route[rand_city1]
+    route[rand_city1] = route[rand_city2]
+    route[rand_city2] = temp
+    
+    return route
+
+# Stagnation
+def stagnation(route):
+    for i in range up to 5
+        route = call evolut_mutate(route)
+    return route
+
+# Greedy
+define function:
+    call the load_data function to read the city names and distance values
+
+    create variables to track the best route and the shortest total distance
+
+    for loop for each starting city:
+        route = list starting with the current starting city
+        distance_traveled = 0
+        unvisited_cities = list of all city indexes except the starting city
+
+        inner loop while there are still unvisited cities:
+            current_city = last city added to the route
+            call nearest_unvisited to find the closest unvisited city and its distance
+            add that city to the route
+            add the distance to the total distance
+            remove that city from the unvisited list
+
+        after visiting all cities:
+            add distance from the last city back to the starting city
+
+        if this route’s total distance is shorter than the current best:
+            update best_route and shortest_distance with this new route
+
+    convert best_route from index numbers to city names
+
+    return the final route and the total distance
+
+# Backtracking
+
+global routes empty list
+global city_list = [0,1,2,3,4,5,6]
+
+def tsp_backtracking:
+    use global variables
+    call read_files(distance_file)
+
+    for second_city in range from 1 to len(city_list):
+        for last_city from second_city + 1 to len(city_list) - 1:
+
+        create partial_rouute = [0, second_city, last_city]
+        add partial_route to routes
+
+    call helper function tsp_recursive
+
+    print routes
